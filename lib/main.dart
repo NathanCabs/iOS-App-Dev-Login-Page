@@ -1,101 +1,41 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Simple Login',
       theme: ThemeData(
-
-
-
-
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: LoginScreen(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-
-
-
-  final String title;
-
+class LoginScreen extends StatefulWidget {
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    final Width = MediaQuery.of(context).size.width;
-  return Scaffold(
-    backgroundColor: Colors.white,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            height: 400,
-            child: Stack(
-              children: <Widget>[
-                Positioned(
-                  child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image:AssetImage(),
-                      fit: BoxFit.fill
-                      )
-                  ),
-                ),
-                ),
-                Positioned(
-                  height: 350,
-                  width: width + 10,
-                  child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image:AssetImage(),
-                      fit: BoxFit.fill
-                      )
-                  ),
-                ),
-                ),
-              ],
-            ),
-          ),
+class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 40),
-            child:Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[],
-                Text("Login", style: TextStyle(color: Color(49, 39, 79, 1), fontWeight: FontWeight.bold, fontSize: 30),),
-                SizedBox(height: 40,), 
-                Container(
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Colors.white
-                  ),
-                  )
-            ),
-            )
-        ],
+  void _login() {
+    String username = _usernameController.text;
+    String password = _passwordController.text;
 
-    ),
-  );
+    if (username.isNotEmpty && password.isNotEmpty) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => SuccessScreen()),
+      );
+    }
   }
-}
 
-
+  
